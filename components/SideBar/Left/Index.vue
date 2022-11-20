@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen bg-white">
+  <div class="flex flex-col h-screen bg-white" :class="defaultTransition">
     <!-- First Level -->
     <ul
       v-for="(first, index) in dummyData"
@@ -16,7 +16,7 @@
           <li
             v-for="(second, idx) in first.sub"
             :key="second"
-            class="font-normal text-sm pl-3 py-1 text-gray-400 hover:bg-green-100 hover:text-green-600"
+            class="font-normal text-sm pl-3 py-1 text-gray-400 hover:bg-green-100 hover:text-green-600 cursor-pointer"
             :class="[
               idx === activeSub && first.id === activeFirstId
                 ? activeClass
@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import IconList from "~~/components/Icons/LeftSideBar";
+const { defaultTransition } = useTailwindCofing();
 const dummyData = [
   {
     title: "讨论区",
