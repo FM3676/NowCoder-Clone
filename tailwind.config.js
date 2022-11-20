@@ -2,13 +2,13 @@
 module.exports = {
   content: [],
   theme: {
-    screens: {
-      xs: "614px",
-      sm: "1002px",
-      md: "1022px",
-      lg: "1092px",
-      xl: "1280px",
-    },
+    // screens: {
+    //   xs: "614px",
+    //   sm: "1002px",
+    //   md: "1022px",
+    //   lg: "1092px",
+    //   xl: "1280px",
+    // },
 
     extend: {
       colors: {
@@ -24,7 +24,14 @@ module.exports = {
           800: "#162d40",
           900: "#15202b",
         },
+        green: {
+          250:"#5bd5ad",
+          350: "#32ca99",
+        },
       },
+      maxWidth: {
+      "8xl":"88rem"
+    },
     },
   },
   plugins: [],
