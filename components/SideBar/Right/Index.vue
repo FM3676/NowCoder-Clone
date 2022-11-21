@@ -67,62 +67,10 @@
 </template>
 
 <script setup lang="ts">
+import DummyData from './DummyData';
+
 const { defaultTransition } = useTailwindCofing();
-const dummyCreateCenterData = [
-  {
-    title: "发动态",
-    img: "https://static.nowcoder.com/images-nk/oss/creation/creation-feed-publish.png",
-  },
-  {
-    title: "写文章",
-    img: "https://static.nowcoder.com/images-nk/oss/creation/creation-post-publish.png",
-  },
-  {
-    title: "发内推",
-    img: "https://static.nowcoder.com/images-nk/oss/creation/creation-career-push-publish.png",
-  },
-];
-const dummyData = [
-  {
-    title: "时事热点",
-    sub: [
-      {
-        title: "笔试成绩不好也能获得面试机会吗",
-        link: "",
-        Date: "10-15 22:01",
-        repliesCount: 15,
-      },
-      {
-        title: "笔试成绩不好也能获得面试机会吗",
-        link: "",
-        Date: "10-15 22:01",
-        repliesCount: 15,
-      },
-    ],
-  },
-  {
-    title: "时事热点",
-    sub: [
-      {
-        title: "笔试成绩不好也能获得面试机会吗",
-        link: "",
-        Date: "10-15 22:01",
-        repliesCount: 15,
-      },
-    ],
-  },
-  {
-    title: "时事热点",
-    sub: [
-      {
-        title: "笔试成绩不好也能获得面试机会吗",
-        link: "",
-        Date: "10-15 22:01",
-        repliesCount: 15,
-      },
-    ],
-  },
-];
+const dummyData = DummyData();
 </script>
 
 <style scoped>

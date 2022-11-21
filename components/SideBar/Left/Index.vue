@@ -33,24 +33,9 @@
 
 <script setup lang="ts">
 import IconList from "~~/components/Icons/LeftSideBar";
+import DummyData from "./DummyData";
 const { defaultTransition } = useTailwindCofing();
-const dummyData = [
-  {
-    title: "讨论区",
-    id: 1,
-    sub: ["交流讨论", "交流讨论", "交流讨论", "交流讨论"],
-  },
-  {
-    title: "圈子",
-    id: 2,
-    sub: ["热议动态"],
-  },
-  {
-    title: "我的圈子",
-    id: 3,
-    sub: ["暂无圈子"],
-  },
-];
+const dummyData = DummyData()
 const activeClass = "bg-green-100 text-green-600";
 const activeFirstId = ref<number>(1);
 const activeSub = ref<number>(0);
