@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white px-4 py-3 rounded-md mb-2"
+    class="bg-white px-4 pt-3 rounded-md mb-2"
     :class="[{ 'module-head': props.moduleHead }]"
   >
     <h1 class="text-gray-600" :class="[{ 'font-bold': props.boldTilte }]">

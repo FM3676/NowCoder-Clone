@@ -35,11 +35,13 @@
       <div>
         <NuxtLink
           to="/"
-          class="bg-green-350 rounded-md text-white w-full block text-sm text-center py-2 hover:bg-green-250"
+          class="bg-green-350 rounded-md text-white w-full block text-sm text-center py-2 mb-3 hover:bg-green-250"
           >进入创作者中心</NuxtLink
         >
       </div>
     </SideBarRightPreviewCard>
+
+
     <!-- Billboard -->
     <SideBarRightPreviewCard
       v-for="card in dummyData"
@@ -122,3 +124,9 @@ const dummyData = [
   },
 ];
 </script>
+
+<style scoped>
+ul li:last-child{
+  border-bottom: none;
+}
+</style>
