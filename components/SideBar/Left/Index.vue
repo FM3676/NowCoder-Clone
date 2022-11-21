@@ -17,11 +17,8 @@
             v-for="(second, idx) in first.sub"
             :key="second"
             class="font-normal text-sm pl-3 py-1 text-gray-400 hover:bg-green-100 hover:text-green-600 cursor-pointer"
-            :class="[
-              idx === activeSub && first.id === activeFirstId
-                ? activeClass
-                : '',
-            ]"
+            :class="isActive(idx, first.id)"
+            @click="handleActive(idx, first.id)"
           >
             {{ second }}
           </li>
@@ -35,8 +32,18 @@
 import IconList from "~~/components/Icons/LeftSideBar";
 import DummyData from "./DummyData";
 const { defaultTransition } = useTailwindCofing();
-const dummyData = DummyData()
-const activeClass = "bg-green-100 text-green-600";
+const dummyData = DummyData();
+
+const activeClass = " bg-green-100 text-green-600";
 const activeFirstId = ref<number>(1);
 const activeSub = ref<number>(0);
+const handleActive = (idx: number, firstId: number) => {
+  activeSub.value = idx;
+  activeFirstId.value = firstId;
+};
+const isActive = (idx: number, firstId: number): string =>
+  defaultTransition +
+  (idx === activeSub.value && firstId === activeFirstId.value
+    ? activeClass
+    : "");
 </script>

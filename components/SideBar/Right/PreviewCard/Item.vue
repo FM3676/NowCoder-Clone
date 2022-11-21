@@ -1,7 +1,7 @@
 <template>
-    <li class="flex flex-col border-b pt-2" :class="defaultTransition">
+    <li class="flex flex-col border-b pt-2">
       <NuxtLink :to="props.link">
-        <h2 class="text-gray-600 hover:text-green-600 mb-3">{{ props.title }}</h2>
+        <h2 class="text-gray-600 hover:text-green-600 mb-3" :class="defaultTransition">{{ props.title }}</h2>
       </NuxtLink>
 
       <div class="flex flex-row justify-between items-center text-gray-400 text-xs mb-3">
