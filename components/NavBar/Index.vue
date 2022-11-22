@@ -48,7 +48,13 @@
         </template>
       </ElPopover>
       <!-- Sign in / Sign up button -->
-      <button class="flex justify-center items-center py-2 px-4 ml-4 rounded-lg text-sm bg-green-350 text-white" type="button" >登录/注册</button>
+      <button
+        class="flex justify-center items-center py-2 px-4 ml-4 rounded-lg text-sm bg-green-350 text-white"
+        type="button"
+        @click="emits('onOpenLoginDialog')"
+      >
+        登录/注册
+      </button>
     </nav>
   </div>
 </template>
@@ -56,6 +62,6 @@
 <script setup lang="ts">
 import { ElPopover } from "element-plus";
 import DummyData from "./DummyData";
-
+const emits = defineEmits(["onOpenLoginDialog"]);
 const options = DummyData();
 </script>

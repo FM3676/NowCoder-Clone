@@ -5,9 +5,11 @@
       <!-- App -->
       <div class="min-h-full">
         <!-- NavBar -->
-        <NavBar />
-        <div class="grid grid-cols-12 mx-auto lg:max-w-8xl lg:px-8 lg:gap-3 pt-16"><!-- sm:px-6 -->
-          
+        <NavBar @on-open-login-dialog="handleOpenLoginDialog" />
+        <div
+          class="grid grid-cols-12 mx-auto lg:max-w-8xl lg:px-8 lg:gap-3 pt-16"
+        >
+          <!-- sm:px-6 -->
           <!-- Left Sidebar -->
           <aside class="bg-red-500 hidden md:block md:col-span-2">
             <!-- xs-col-span-1 xl:col-span-2 -->
@@ -27,9 +29,20 @@
         </div>
       </div>
       <!-- Auth Page -->
+      <Auth :is-open="authPageOpening" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-const darkMode = false;
+const darkMode = ref<boolean>(false);
+const authPageOpening = ref<boolean>(false);
+const handleOpenLoginDialog = () =>
+  (authPageOpening.value = !authPageOpening.value);
 </script>
+<style>
+.el-dialog__header,
+.el-dialog__body {
+  padding: 0;
+  padding-bottom: 0;
+}
+</style>
