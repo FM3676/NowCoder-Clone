@@ -1,15 +1,12 @@
 <template>
   <div :class="{ dark: darkMode }">
-    
     <div class="bg-gray-100">
       <!-- Loading Page -->
       <!-- App -->
       <div class="min-h-full">
         <!-- NavBar -->
         <NavBar @on-open-login-dialog="handleOpenLoginDialog" />
-        <div
-          class="grid grid-cols-12 mx-auto w-xl lg:px-8 lg:gap-3 pt-16"
-        >
+        <div class="grid grid-cols-12 mx-auto w-xl lg:px-8 lg:gap-3 pt-16">
           <!-- sm:px-6 -->
           <!-- Left Sidebar -->
           <aside class="bg-red-500 col-span-2">
@@ -19,7 +16,7 @@
             </div>
           </aside>
           <!-- Main Content -->
-          <main class="bg-green-500 col-span-7">Main</main>
+          <main class="col-span-7"><MainSection /></main>
           <!-- Right Sidebar -->
           <aside class="col-span-3">
             <!--  xl:col-span-4 md:col-span-3 -->
