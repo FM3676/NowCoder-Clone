@@ -25,14 +25,21 @@ module.exports = {
           900: "#15202b",
         },
         green: {
-          50:"#eefaf7",
-          250:"#5bd5ad",
+          50: "#eefaf7",
+          250: "#5bd5ad",
           350: "#32ca99",
         },
       },
       maxWidth: {
-      "8xl":"88rem"
-    },
+        "8xl": "88rem",
+      },
+      width: {
+          xs: "614px",
+          sm: "1002px",
+          md: "1022px",
+          lg: "1092px",
+          xl: "1280px",
+      },
     },
   },
   plugins: [],

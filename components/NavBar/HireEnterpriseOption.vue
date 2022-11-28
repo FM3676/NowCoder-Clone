@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center p-2 bg-green-50 text-green-350 rounded-xl text-sm"
+    class="flex justify-center items-center p-2 bg-green-50 text-green-350 rounded-xl text-sm cursor-pointer"
   >
     {{ props.title
     }}<span class="w-4 h-4"

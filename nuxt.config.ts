@@ -9,4 +9,11 @@ export default defineNuxtConfig({
   vite: {
     plugins: [ElementPlus()],
   },
+  app: {
+    head: {
+      charset: "utf-16",
+      title: "NowCoder",
+      meta: [{ name: "description", content: "NowCoder Clone" }],
+    },
+  },
 });
