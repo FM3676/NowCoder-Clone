@@ -4,10 +4,10 @@
       ><el-form-item prop="phone">
         <el-input
           v-model="ruleForm.phone"
-          type="phone"
+          type="email"
           autocomplete="off"
           size="large"
-          placeholder="Input Your Phone Number"
+          placeholder="Input Your Email"
         />
       </el-form-item>
       <el-form-item prop="pass">
@@ -42,8 +42,9 @@ const validatePass = (rule: any, value: any, callback: any) => {
     callback(new Error("Please input more than 8 characters"));
 };
 
-const validatePhone = (rule: any, value: any, callback: any) => {
-  if (value === "") callback(new Error("Please input the phone"));
+const validateEmail = (rule: any, value: any, callback: any) => {
+  if (value === "" || value.includes("@"))
+    callback(new Error("Please input the phone"));
 };
 
 const ruleForm = reactive({
@@ -53,7 +54,7 @@ const ruleForm = reactive({
 
 const rules = reactive({
   pass: [{ validator: validatePass, trigger: "blur" }],
-  phone: [{ validator: validatePhone, trigger: "blur" }],
+  phone: [{ validator: validateEmail, trigger: "blur" }],
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {

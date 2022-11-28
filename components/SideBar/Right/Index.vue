@@ -41,12 +41,13 @@
       </div>
     </SideBarRightPreviewCard>
 
-
     <!-- Billboard -->
     <SideBarRightPreviewCard
       v-for="card in dummyData"
       :key="card.title"
       :title="card.title"
+      :boldTilte="true"
+      :moduleHead="true"
     >
       <ul
         class="flex flex-col cursor-pointer text-sm"
@@ -67,14 +68,14 @@
 </template>
 
 <script setup lang="ts">
-import DummyData from './DummyData';
+import DummyData from "./DummyData";
 
 const { defaultTransition } = useTailwindCofing();
 const dummyData = DummyData();
 </script>
 
 <style scoped>
-ul li:last-child{
+ul li:last-child {
   border-bottom: none;
 }
 </style>

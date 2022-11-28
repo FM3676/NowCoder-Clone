@@ -12,10 +12,11 @@
       <!-- Menu -->
       <ul class="h-full flex ml-8">
         <NavBarMenuItem
-          v-for="item in options"
+          v-for="(item, index) in options"
           :title="item.title"
           :sub="item.sub"
           :key="item.title"
+          :active="index === activeMenuItem"
         />
       </ul>
       <!-- SearchBar -->
@@ -31,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import { ElPopover } from "element-plus";
 import DummyData from "./DummyData";
 const emits = defineEmits(["onOpenLoginDialog"]);
 const options = DummyData();
-const isAuth = ref(true);
+const isAuth = ref(false);
+const activeMenuItem = ref(0);
 </script>
