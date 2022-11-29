@@ -1,26 +1,24 @@
 <template>
   <!-- Hire & Enterprise -->
   <div class="ml-4 grid gap-4 grid-flow-col">
-    <NavBarHireEnterpriseOption title="我要招聘" />
-    <NavBarHireEnterpriseOption title="去企业版" />
+    <div
+      class="flex justify-center items-center p-2 bg-green-50 text-green-350 rounded-xl text-sm cursor-pointer"
+    >
+      去企业版<span class="w-4 h-4"><ArrowRight /></span>
+    </div>
+    <div
+      class="flex justify-center items-center p-2 bg-green-50 text-green-350 rounded-xl text-sm cursor-pointer"
+    >
+      我要招聘<span class="w-4 h-4"><ArrowRight /></span>
+    </div>
   </div>
   <!-- DownLoad App (Phone Icon) -->
   <ElPopover placement="bottom" content="下载App" trigger="hover">
     <template #reference>
       <span
-        class="ml-4 h-8 w-8 flex justify-center items-center text-gray-400 hover:bg-gray-200 rounded-md"
+        class="ml-4 h-8 w-8 flex justify-center items-center text-gray-400 hover:bg-gray-200 rounded-md cursor-pointer"
       >
-        <svg
-          class="w-6 h-6"
-          viewBox="0 0 1024 1024"
-          xmlns="http://www.w3.org/2000/svg"
-          data-v-029747aa=""
-        >
-          <path
-            fill="currentColor"
-            d="M224 768v96.064a64 64 0 0 0 64 64h448a64 64 0 0 0 64-64V768H224zm0-64h576V160a64 64 0 0 0-64-64H288a64 64 0 0 0-64 64v544zm32 288a96 96 0 0 1-96-96V128a96 96 0 0 1 96-96h512a96 96 0 0 1 96 96v768a96 96 0 0 1-96 96H256zm304-144a48 48 0 1 1-96 0 48 48 0 0 1 96 0z"
-          ></path>
-        </svg>
+        <Iphone />
       </span>
     </template>
   </ElPopover>
@@ -35,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElPopover } from "element-plus";
+import { ArrowRight, Iphone } from "@element-plus/icons-vue";
 const emits = defineEmits(["onOpenLoginDialog"]);
 </script>
-
-<style scoped></style>

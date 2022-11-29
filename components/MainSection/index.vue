@@ -19,7 +19,7 @@
         <li
           v-for="(item, index) in orderTypes"
           :key="item"
-          class="text-gray-400 hover:text-green-250 relative"
+          class="text-gray-400 hover:text-green-250 relative cursor-pointer"
           :class="[{ selectedOrderType: activeOrderType === index }]"
         >
           {{ item }}
