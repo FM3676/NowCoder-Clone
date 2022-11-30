@@ -7,7 +7,7 @@
       <li
         v-for="(item, index) in lilNavOptions"
         :key="item"
-        class="py-1 px-4 text-black hover:text-white hover:bg-green-350"
+        class="py-1 px-4 text-black cursor-pointer hover:text-white hover:bg-green-350"
         :class="[{ selectedNavOption: activeNavOption === index }]"
       >
         {{ item }}

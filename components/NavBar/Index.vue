@@ -1,6 +1,6 @@
 <template>
-  <div class="w-screen bg-white fixed top-0 h-14 z-50">
-    <nav class="flex h-full px-8 mx-auto w-xl justify-start items-center">
+  <div class="w-full bg-white sticky top-0 h-14 z-50">
+    <nav class="flex h-full px-6 mx-auto w-xl justify-start items-center">
       <!-- LOGO -->
       <picture class="h-6">
         <img
