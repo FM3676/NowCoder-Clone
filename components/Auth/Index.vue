@@ -1,10 +1,5 @@
 <template>
-  <ElDialog
-    v-model="props.isOpen"
-    width="48rem"
-    align-center
-    append-to-body
-  >
+  <ElDialog v-model="props.isOpen" width="48rem" align-center append-to-body>
     <div class="flex">
       <!-- Left Side -->
       <div
@@ -32,23 +27,23 @@
         >
           <span
             class="w-24 flex justify-center items-center z-10"
-            :class="[{ active: !isRegistering }]"
+            :class="[{ active: isRegistering }]"
             @click="changeRegisterOrLogin"
             >注册登录</span
           >
           <span
             class="w-24 flex justify-center items-center z-10"
-            :class="[{ active: isRegistering }]"
+            :class="[{ active: !isRegistering }]"
             @click="changeRegisterOrLogin"
             >密码登录</span
           >
           <span
             class="switch-button absolute rounded-md bg-white h-8 transition-transform"
-            :class="[{ 'switch-button-transform': isRegistering }]"
+            :class="[{ 'switch-button-transform': !isRegistering }]"
           ></span>
         </div>
         <!-- Form -->
-        <AuthForm />
+        <AuthForm @on-submit="handleSubmit" :is-registering="isRegistering" />
       </div>
     </div>
   </ElDialog>
@@ -56,11 +51,19 @@
 
 <script setup lang="ts">
 import { ElDialog } from "element-plus";
+const { register, login } = useAuth();
 const props = defineProps<{ isOpen: boolean }>();
-const emits = defineEmits(["onCloseDialog"]);
-const isRegistering = ref<boolean>(false);
+const isRegistering = ref<boolean>(true);
 const changeRegisterOrLogin = () =>
   (isRegistering.value = !isRegistering.value);
+
+const handleSubmit = (email: string, password: string, username: string) => {
+  console.log(isRegistering.value);
+
+  isRegistering.value
+    ? register(email, password, username)
+    : login(username, password);
+};
 </script>
 
 <style scoped>

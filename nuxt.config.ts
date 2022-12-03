@@ -16,4 +16,7 @@ export default defineNuxtConfig({
       meta: [{ name: "description", content: "NowCoder Clone" }],
     },
   },
+  runtimeConfig: {
+    baseURL: process.env.BASE_URL,
+  },
 });

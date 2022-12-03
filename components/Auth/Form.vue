@@ -1,13 +1,22 @@
 <template>
-  <div class="mt-12 w-72">
-    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules"
-      ><el-form-item prop="phone">
+  <div class="mt-6 w-72">
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
+      <el-form-item prop="email">
         <el-input
-          v-model="ruleForm.phone"
+          v-if="props.isRegistering"
+          v-model="ruleForm.email"
           type="email"
           autocomplete="off"
           size="large"
           placeholder="Input Your Email"
+        /> </el-form-item
+      ><el-form-item prop="username">
+        <el-input
+          v-model="ruleForm.username"
+          type="text"
+          autocomplete="off"
+          size="large"
+          placeholder="Input Your Username"
         />
       </el-form-item>
       <el-form-item prop="pass">
@@ -19,13 +28,15 @@
           placeholder="Input Your Password"
         />
       </el-form-item>
+
       <el-form-item>
-        <el-button
-          type="primary"
+        <button
+          type="button"
           @click="submitForm(ruleFormRef)"
-          class="w-full bg-green-350 py-1 rounded-lg text-white text-center"
-          >登录</el-button
-        ></el-form-item
+          class="w-full bg-green-350 py-1 rounded-lg text-white text-center cursor-pointer"
+        >
+          登录
+        </button></el-form-item
       >
     </el-form>
   </div>
@@ -34,6 +45,7 @@
 <script setup lang="ts">
 import { ElForm, ElFormItem, ElInput, FormInstance } from "element-plus";
 const emits = defineEmits(["onSubmit"]);
+const props = defineProps<{ isRegistering: boolean }>();
 const ruleFormRef = ref<FormInstance>();
 
 const validatePass = (rule: any, value: any, callback: any) => {
@@ -43,24 +55,38 @@ const validatePass = (rule: any, value: any, callback: any) => {
 };
 
 const validateEmail = (rule: any, value: any, callback: any) => {
-  if (value === "" || value.includes("@"))
-    callback(new Error("Please input the phone"));
+  if (value === "" || !value.includes("@"))
+    callback(new Error("Please input the email"));
+};
+
+const validateUsername = (rule: any, value: any, callback: any) => {
+  if (props.isRegistering)
+    if (value === "" || value.length < 4)
+      callback(new Error("Please input the username more than 4 characters"));
 };
 
 const ruleForm = reactive({
-  phone: "",
+  username: "",
+  email: "",
   pass: "",
 });
 
 const rules = reactive({
   pass: [{ validator: validatePass, trigger: "blur" }],
-  phone: [{ validator: validateEmail, trigger: "blur" }],
+  email: [{ validator: validateEmail, trigger: "blur" }],
+  username: [{ validator: validateUsername, trigger: "blur" }],
 });
 
-const submitForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.validate((valid) =>
-    valid ? emits("onSubmit") : console.log("Fail to submit")
-  );
+const submitForm = async (formEl: FormInstance | undefined) => {
+  // await nextTick();
+  // if (!formEl) return;
+  // formEl.validate((valid) => {
+  //   if (valid) {
+      emits("onSubmit", ruleForm.email, ruleForm.pass, ruleForm.username);
+    // } else {
+    //   console.log("error submit!");
+    //   return false;
+    // }
+  // });
 };
 </script>

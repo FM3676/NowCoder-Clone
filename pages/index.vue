@@ -2,7 +2,7 @@
   <NuxtLayout name="basic-nav">
     <div class="grid grid-cols-12 mx-auto w-xl gap-3 lg:px-8  pt-16 bg-gray-100">
       <!-- Left Sidebar -->
-      <aside class="bg-red-500 col-span-2">
+      <aside class="col-span-2">
         <div class="sticky top-0">
           <SideBarLeft />
         </div>

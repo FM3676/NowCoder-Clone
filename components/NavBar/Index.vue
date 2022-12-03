@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white sticky top-0 h-14 z-50">
+  <div class="w-full bg-white fixed top-0 h-14 z-50">
     <nav class="flex h-full px-6 mx-auto w-xl justify-start items-center">
       <!-- LOGO -->
       <picture class="h-6">
@@ -22,11 +22,11 @@
       <!-- SearchBar -->
       <NavBarSearchBar />
       <!-- Right ChangeABLE Part -->
+      <NavBarIsAuthRightPart v-if="!isAuth" />
       <NavBarNotAuthRightPart
-        v-if="!isAuth"
+        v-else
         @on-open-login-dialog="emits('onOpenLoginDialog')"
       />
-      <NavBarIsAuthRightPart v-else />
     </nav>
   </div>
 </template>
@@ -35,6 +35,8 @@
 import DummyData from "./DummyData";
 const emits = defineEmits(["onOpenLoginDialog"]);
 const options = DummyData();
-const isAuth = ref(false);
+const { useAuthUser } = useAuth();
+const user = useAuthUser();
+const isAuth = ref(!!user);
 const activeMenuItem = ref(0);
 </script>
