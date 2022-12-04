@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white fixed top-0 h-14 z-50">
+  <div class="w-full bg-white fixed top-0 h-14 z-50 shadow-md">
     <nav class="flex h-full px-6 mx-auto w-xl justify-start items-center">
       <!-- LOGO -->
       <picture class="h-6">

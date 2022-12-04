@@ -1,0 +1,24 @@
+<template>
+  <NuxtLayout name="basic-nav">
+    <div class="grid grid-cols-12 mx-auto w-xl  gap-3 lg:px-8 pt-20 bg-gray-100">
+      <!-- Main Content -->
+      <main class="col-span-9">
+        <Post />
+      </main>
+      <!-- Right Sidebar -->
+      <aside class="col-span-3">
+        <div class="sticky top-0">
+          <SideBarRight />
+        </div>
+      </aside>
+    </div>
+  </NuxtLayout>
+</template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: "basic-nav",
+});
+</script>
+
+<style scoped></style>
