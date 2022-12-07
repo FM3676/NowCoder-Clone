@@ -22,7 +22,7 @@
       <!-- SearchBar -->
       <NavBarSearchBar />
       <!-- Right ChangeABLE Part -->
-      <NavBarIsAuthRightPart v-if="!isAuth" />
+      <NavBarIsAuthRightPart v-if="isAuth" />
       <NavBarNotAuthRightPart
         v-else
         @on-open-login-dialog="emits('onOpenLoginDialog')"
@@ -37,6 +37,7 @@ const emits = defineEmits(["onOpenLoginDialog"]);
 const options = DummyData();
 const { useAuthUser } = useAuth();
 const user = useAuthUser();
-const isAuth = ref(!!user);
+
+const isAuth = ref(false);
 const activeMenuItem = ref(0);
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <form class="flex bg-gray-100 rounded-md p-3 mt-4 gap-6">
+  <form class="flex bg-gray-100 rounded-md px-4 py-2 mt-4 gap-6">
     <input
       class="rounded-md flex-grow focus:outline-none focus:border focus:border-green-350 p-2"
       type="text"

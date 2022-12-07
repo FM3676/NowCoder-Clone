@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="basic-nav">
-    <div class="grid grid-cols-12 mx-auto w-xl  gap-3 lg:px-8 pt-20 bg-gray-100">
+    <div class="grid grid-cols-12 mx-auto w-xl  gap-3 lg:px-8 pt-6 bg-gray-100">
       <!-- Main Content -->
       <main class="col-span-9">
         <Post />

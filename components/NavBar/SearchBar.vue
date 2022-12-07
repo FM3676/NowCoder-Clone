@@ -4,7 +4,7 @@
   >
     <input
       type="search"
-      class="flex-grow bg-gray-100 text-sm"
+      class="flex-grow bg-gray-100 text-sm outline-none"
       placeholder="搜索面经/职位/试题/公司"
     />
     <!-- Search Icon -->
