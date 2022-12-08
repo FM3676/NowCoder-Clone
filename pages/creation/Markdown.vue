@@ -10,11 +10,13 @@
       <button
         type="button"
         class="bg-green-250 text-3xl text-white py-3 px-5 rounded-lg"
+        @click="handlePostPublish"
       >
-        发布
+        <span v-if="!isPublishing">发布</span>
+        <UISpinner v-else />
       </button>
     </div>
-    <Editor @change="handleChange" :plugins="plugins" :value="value" />
+    <Editor @change="handleChange" :plugins="plugins" :value="content" />
   </div>
 </template>
 
@@ -25,6 +27,7 @@ import highlight from "@bytemd/plugin-highlight-ssr";
 import math from "@bytemd/plugin-math-ssr";
 import "~~/assets/CodeMirrow.css";
 import "~~/assets/MdPreview.css";
+const { publishPost } = usePost();
 
 useHead({
   link: [
@@ -36,9 +39,22 @@ useHead({
 });
 
 const plugins = [gfm(), highlight(), math()];
-const value = ref("");
+const content = ref("");
 const title = ref("");
-const handleChange = (v: string) => (value.value = v);
+const isPublishing = ref(false);
+const handleChange = (v: string) => (content.value = v);
+const handlePostPublish = () => {
+  isPublishing.value = true;
+  publishPost(title.value, content.value)
+    .then((res) => {
+      console.log(res);
+      if (res) useRouter().push("/");
+      isPublishing.value = false;
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+};
 </script>
 
 <style scoped></style>

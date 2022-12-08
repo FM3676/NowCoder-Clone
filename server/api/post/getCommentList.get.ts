@@ -2,9 +2,6 @@ export default defineEventHandler(async (event) => {
   const baseURL = useRuntimeConfig().baseURL;
   const myHeaders = new Headers();
   myHeaders.append("User-Agent", "Apifox/1.0.0 (https://www.apifox.cn)");
-  myHeaders.append("Accept", "*/*");
-  myHeaders.append("Host", "mock.apifox.cn");
-  myHeaders.append("Connection", "keep-alive");
 
   const requestOptions: RequestInit = {
     method: "GET",

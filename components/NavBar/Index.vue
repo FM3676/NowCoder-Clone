@@ -2,7 +2,7 @@
   <div class="w-full bg-white fixed top-0 h-14 z-50 shadow-md">
     <nav class="flex h-full px-6 mx-auto w-xl justify-start items-center">
       <!-- LOGO -->
-      <picture class="h-6">
+      <picture class="h-6" @click="backToIndex">
         <img
           class="h-full cursor-pointer"
           src="https://static.nowcoder.com/fe/file/logo/1.png"
@@ -38,6 +38,10 @@ const options = DummyData();
 const { useAuthUser } = useAuth();
 const user = useAuthUser();
 
+const backToIndex = () => {
+  useRouter().push({ path: "/" });
+};
+
 const isAuth = ref(false);
-const activeMenuItem = ref(0);
+const activeMenuItem = ref(5);
 </script>

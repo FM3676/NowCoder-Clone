@@ -2,7 +2,7 @@
   <div class="bg-gray-100 min-w-min">
     <!-- App -->
     <div class="min-h-screen">
-      <RouterView />
+      <NuxtPage :key="$route.fullPath" />
     </div>
   </div>
 </template>
