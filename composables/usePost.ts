@@ -1,4 +1,4 @@
-import { FirstLevelComment } from "~~/interfaces/postInterface";
+import { FirstLevelComment, Post } from "~~/interfaces/postInterface";
 
 export default () => {
   const getPostComments = (id: string): Promise<FirstLevelComment[]> =>
@@ -16,6 +16,7 @@ export default () => {
         reject(error);
       }
     });
+
   const publishPost = (title: string, content: string) =>
     new Promise(async (resolve, reject) => {
       const token = useAuth().useAuthToken();
@@ -34,5 +35,26 @@ export default () => {
       }
     });
 
-  return { getPostComments, publishPost };
+  const getPostList = (
+    pageNum: number,
+    pageSize: number,
+    userId?: number
+  ): Promise<{
+    posts: Post[];
+    total: number;
+  }> =>
+    new Promise(async (resolve, reject) => {
+      try {
+        const {data} = await $fetch("/api/post/getPosts", { method: "GET" });
+
+        resolve({
+          posts: data.rows,
+          total: data.total,
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+  return { getPostComments, publishPost, getPostList };
 };

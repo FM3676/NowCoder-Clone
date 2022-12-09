@@ -1,3 +1,17 @@
+export interface Post {
+  commentCount: number;
+  content: string;
+  createTime: string;
+  id: number;
+  like: boolean;
+  liked: number;
+  score: number | number;
+  status: number;
+  title: string;
+  type: number;
+  userId: string;
+}
+
 export interface Comment {
   content: string;
   createBy: number;

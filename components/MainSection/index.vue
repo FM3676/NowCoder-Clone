@@ -25,16 +25,34 @@
           {{ item }}
         </li>
       </ul>
-      <MainSectionItem />
+      <MainSectionItem
+        v-for="item in postList"
+        :key="item.createTime"
+        :post="item"
+      />
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Post } from "~~/interfaces/postInterface";
+
 const lilNavOptions = ["交流讨论", "找面经", "找内推", "建立互助点评"];
 const orderTypes = ["默认", "最新", "最热", "精华"];
 const activeNavOption = ref(0);
 const activeOrderType = ref(0);
+
+const { getPostList } = usePost();
+const postList = ref<Post[]>([]);
+const postListTotal = ref(0);
+
+onMounted(() => {
+  getPostList(1, 1).then((res) => {
+    const PostListResult = res;
+    postList.value = PostListResult.posts;
+    postListTotal.value = PostListResult.total;
+  });
+});
 </script>
 
 <style scoped>
