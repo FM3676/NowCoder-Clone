@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-4">
     <!-- Info -->
     <PostHeader
       :created-time="comment.createTime"

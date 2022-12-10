@@ -1,7 +1,11 @@
 <template>
   <div class="mt-4">
     <div class="font-bold text-lg py-2">全部评论</div>
-    <PostCommentItem v-for="item in commentList" :key="item.createTime" :comment="item" />
+    <PostCommentItem
+      v-for="item in commentList?.comments"
+      :key="item.createTime"
+      :comment="item"
+    />
   </div>
 </template>
 
@@ -9,9 +13,9 @@
 import { FirstLevelComment } from "~~/interfaces/postInterface";
 
 const { getPostComments } = usePost();
-const commentList = ref<FirstLevelComment[]>();
+const commentList = ref<{ comments: FirstLevelComment[]; total: number }>();
 onMounted(async () => {
-  commentList.value = await getPostComments("12");
+  commentList.value = await getPostComments(1, 1, 12);
 });
 </script>
 
