@@ -11,11 +11,11 @@
 
 <script setup lang="ts">
 import { FirstLevelComment } from "~~/interfaces/postInterface";
-
+const props = defineProps<{ postId: string }>();
 const { getPostComments } = usePost();
 const commentList = ref<{ comments: FirstLevelComment[]; total: number }>();
 onMounted(async () => {
-  commentList.value = await getPostComments(1, 1, 12);
+  commentList.value = await getPostComments(1, 1, props.postId);
 });
 </script>
 

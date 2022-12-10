@@ -23,11 +23,13 @@
     <!-- Main -->
     <div class="flex flex-col justify-center gap-2">
       <div class="flex justify-start items-center">
-        <h2
-          class="text-lmd font-bold text-black cursor-pointer hover:text-green-350"
-        >
-          {{ props.post.title }}
-        </h2>
+        <NuxtLink :to="`post/${props.post.id}`">
+          <h2
+            class="text-lmd font-bold text-black cursor-pointer hover:text-green-350"
+          >
+            {{ props.post.title }}
+          </h2>
+        </NuxtLink>
       </div>
       <div class="text-gray-300">
         <!-- <img

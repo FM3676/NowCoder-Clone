@@ -1,10 +1,14 @@
 <template>
   <div>
     <!-- Header -->
-    <PostHeader created-time="null" username="saddas"  :show-follow-button="true" />
+    <PostHeader
+      :created-time="props.postDetail.createTime"
+      :username="props.postDetail.username"
+      :show-follow-button="true"
+    />
     <!-- MarkDown Viewer -->
-    <h1 class="font-bold text-2xl mb-4">{{ title }}</h1>
-    <Viewer :plugins="plugins" :value="value" />
+    <h1 class="font-bold text-2xl mb-4">{{ props.postDetail.title }}</h1>
+    <Viewer :plugins="plugins" :value="props.postDetail.content" />
     <!-- Footer Icons -->
     <PostFooter />
   </div>
@@ -16,11 +20,10 @@ import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight-ssr";
 import math from "@bytemd/plugin-math-ssr";
 import "~~/assets/MdPreview.css";
-
+import { Post } from "~~/interfaces/postInterface";
 const plugins = [gfm(), highlight(), math()];
-const value = ref(`## ssssss 
-规划局国际货币`);
-const title = ref("这是一个Title");
+
+const props = defineProps<{ postDetail: Post }>();
 </script>
 
 <style scoped></style>

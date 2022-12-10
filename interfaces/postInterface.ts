@@ -10,6 +10,7 @@ export interface Post {
   title: string;
   type: number;
   userId: string;
+  username: string;
 }
 
 export interface Comment {
