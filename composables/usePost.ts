@@ -45,8 +45,6 @@ export default () => {
       method: "GET",
     });
 
-    console.log(`data:${data}`);
-
     return data;
   })<Post>;
 

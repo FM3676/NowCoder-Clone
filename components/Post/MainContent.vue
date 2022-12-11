@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="props.postDetail">
     <!-- Header -->
     <PostHeader
       :created-time="props.postDetail.createTime"

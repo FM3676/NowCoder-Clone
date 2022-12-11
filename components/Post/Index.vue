@@ -1,11 +1,14 @@
 <template>
   <div class="bg-white rounded-lg p-4">
-    <!-- Main Content -->
-    <PostMainContent :post-detail="postDetail" />
-    <!-- Comment Input -->
-    <PostReplyForm />
-    <!-- Comments -->
-    <PostCommentList :post-id="props.postId" />
+    <UISpinner v-if="isLoading" class="relative left-1/2" />
+    <div v-else>
+      <!-- Main Content -->
+      <PostMainContent :post-detail="postDetail" />
+      <!-- Comment Input -->
+      <PostReplyForm />
+      <!-- Comments -->
+      <PostCommentList :post-id="props.postId" />
+    </div>
   </div>
 </template>
 
@@ -15,9 +18,12 @@ import { Post } from "~~/interfaces/postInterface";
 const props = defineProps<{ postId: string }>();
 const { getPostById } = usePost();
 const postDetail = ref({} as Post);
+const isLoading = ref(true);
 
-onMounted(async () => {
+onBeforeMount(async () => {
+  isLoading.value = true;
   postDetail.value = await getPostById(props.postId);
+  isLoading.value = false;
 });
 </script>
 

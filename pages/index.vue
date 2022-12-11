@@ -3,7 +3,7 @@
     <div class="grid grid-cols-12 mx-auto w-xl gap-3 lg:px-8 pt-2 bg-gray-100">
       <!-- Left Sidebar -->
       <aside class="col-span-2">
-        <div class="sticky top-0">
+        <div class="sticky top-16">
           <SideBarLeft />
         </div>
       </aside>
@@ -13,7 +13,7 @@
       </main>
       <!-- Right Sidebar -->
       <aside class="col-span-3">
-        <div class="sticky top-0">
+        <div class="sticky top-16">
           <SideBarRight />
         </div>
       </aside>
