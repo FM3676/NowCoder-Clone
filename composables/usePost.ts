@@ -26,7 +26,7 @@ export default () => {
         method: "POST",
         body: { title, content },
       });
-      return { data };
+      return true;
     }
   );
 
@@ -48,5 +48,16 @@ export default () => {
     return data;
   })<Post>;
 
-  return { getPostComments, publishPost, getPostList, getPostById };
+  const addComment = withPromiseTryCatch(
+    async (eneityid, content, rootId = -1, toCommentUserId = -1) => {
+      const { data } = await $fetch("/api/post/addComment", {
+        method: "POST",
+        body: { eneityid, content, rootId, toCommentUserId },
+      });
+
+      return true;
+    }
+  );
+
+  return { getPostComments, publishPost, getPostList, getPostById, addComment };
 };
