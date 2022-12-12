@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
   myHeaders.append("Content-Type", "application/json");
 
   const { username, password } = body;
-  console.log({ username, password });
 
   if (!username || !password) {
     return sendError(
@@ -28,7 +27,10 @@ export default defineEventHandler(async (event) => {
     redirect: "follow",
   };
 
-  const loginResult = await fetch(baseURL + "/user/login", requestOptions);
+  const result = await fetch(
+    "https://mock.apifox.cn/m2/1957011-0-default/50816890",
+    requestOptions
+  );
 
-  return { loginResult: await loginResult.json() };
+  return await result.json()
 });

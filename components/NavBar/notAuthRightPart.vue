@@ -13,15 +13,11 @@
     </div>
   </div>
   <!-- DownLoad App (Phone Icon) -->
-  <ElPopover placement="bottom" content="下载App" trigger="hover">
-    <template #reference>
-      <span
-        class="ml-4 h-8 w-8 flex justify-center items-center text-gray-400 hover:bg-gray-200 rounded-md cursor-pointer"
-      >
-        <Iphone />
-      </span>
-    </template>
-  </ElPopover>
+  <span
+    class="ml-4 h-8 w-8 flex justify-center items-center text-gray-400 hover:bg-gray-200 rounded-md cursor-pointer"
+  >
+    <Iphone />
+  </span>
   <!-- Sign in / Sign up button -->
   <button
     class="flex justify-center items-center py-2 px-4 ml-4 rounded-lg text-sm bg-green-350 text-white"
@@ -33,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { ElPopover } from "element-plus";
 import { ArrowRight, Iphone } from "@element-plus/icons-vue";
 const emits = defineEmits(["onOpenLoginDialog"]);
 </script>

@@ -87,11 +87,6 @@ export default () => {
         method: "GET",
         query: { pageNum, pageSize, searchContent },
       });
-      console.log({
-        posts: data.rows,
-        total: data.total,
-      });
-
       return {
         posts: data,
         total: data.length,

@@ -56,14 +56,14 @@ const validatePass = (rule: any, value: any, callback: any) => {
 };
 
 const validateEmail = (rule: any, value: any, callback: any) => {
-  if (value === "" || !value.includes("@"))
-    callback(new Error("Please input the email"));
+  if (props.isRegistering)
+    if (value === "" || !value.includes("@"))
+      callback(new Error("Please input the email"));
 };
 
 const validateUsername = (rule: any, value: any, callback: any) => {
-  if (props.isRegistering)
-    if (value === "" || value.length < 4)
-      callback(new Error("Please input the username more than 4 characters"));
+  if (value === "" || value.length < 4)
+    callback(new Error("Please input the username more than 4 characters"));
 };
 
 const ruleForm = reactive({
