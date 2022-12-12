@@ -33,7 +33,7 @@ export default () => {
     const token = useAuthToken();
     const { data } = await $fetch("/api/users/profile", {
       method: "GET",
-      query: { id, token },
+      query: { id, token: JSON.stringify(token) },
     });
     return data;
   })<UserProfile>;
@@ -42,11 +42,21 @@ export default () => {
     const token = useAuthToken();
     const { data } = await $fetch("/api/users/getFollowNum", {
       method: "GET",
-      query: { token, id },
+      query: { token: JSON.stringify(token), id },
     });
 
     return data;
   })<{ follower: number; fans: number }>;
+
+  const follow = withPromiseTryCatch(async (id: number, followed: boolean) => {
+    const token = useAuthToken();
+    const data = await $fetch("/api/users/follow", {
+      method: "GET",
+      query: { token: JSON.stringify(token), id, followed },
+    });
+    console.log(data);
+    return data;
+  });
 
   return {
     getProfile,
@@ -56,5 +66,6 @@ export default () => {
     setMinTime,
     setOffest,
     getUserFollowFansCount,
+    follow,
   };
 };

@@ -1,7 +1,7 @@
 <template>
   <header class="flex w-full justify-between items-center">
     <!-- Info -->
-    <div class="cursor-pointer">
+    <NuxtLink :to="`/profile/${props.id}`" class="cursor-pointer">
       <!-- Avatar -->
       <span
         class="w-10 h-10 rounded-full overflow-hidden inline-flex justify-center items-center"
@@ -14,29 +14,43 @@
         <p class="text-sm">{{ username }}</p>
         <p class="text-gray-300 text-sm">{{ createdTime }}</p>
       </span>
-    </div>
+    </NuxtLink>
     <!-- Follow Button -->
     <button
+      @click="handleFollow"
       v-if="showFollowButton"
       class="bg-green-350 rounded-lg text-white text-sm h-9 px-6"
     >
-      +关注
+      {{ isFollowed ? "已关注" : "+关注" }}
     </button>
   </header>
 </template>
 
 <script setup lang="ts">
+const { follow } = useUsers();
 const props = withDefaults(
   defineProps<{
     showFollowButton: boolean;
     username: string;
     createdTime: string;
-    headerUrl:string
+    headerUrl: string;
+    id: number;
   }>(),
   {
     showFollowButton: false,
   }
 );
+const isFollowed = ref(false);
+const isHandling = ref(false);
+const handleFollow = async () => {
+  if (isHandling.value) return;
+  isHandling.value = true;
+  const result = await follow(props.id, isFollowed.value);
+  console.log(result);
+  if (!result) return;
+  isFollowed.value = !isFollowed.value;
+  isHandling.value = false;
+};
 </script>
 
 <style scoped></style>

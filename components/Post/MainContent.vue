@@ -6,6 +6,7 @@
       :username="props.postDetail.username"
       :show-follow-button="true"
       :header-url="props.postDetail.headerUrl"
+      :id="props.postDetail.id"
     />
     <!-- MarkDown Viewer -->
     <h1 class="font-bold text-2xl mb-4">{{ props.postDetail.title }}</h1>
