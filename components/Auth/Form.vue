@@ -33,9 +33,10 @@
         <button
           type="button"
           @click="submitForm(ruleFormRef)"
-          class="w-full bg-green-350 py-1 rounded-lg text-white text-center cursor-pointer"
+          class="w-full bg-green-350 py-1 px-32 rounded-lg text-white text-center cursor-pointer"
         >
-          登录
+          <UISpinner v-if="props.isAuthLoading" />
+          <span v-else>登录</span>
         </button></el-form-item
       >
     </el-form>
@@ -45,7 +46,7 @@
 <script setup lang="ts">
 import { ElForm, ElFormItem, ElInput, FormInstance } from "element-plus";
 const emits = defineEmits(["onSubmit"]);
-const props = defineProps<{ isRegistering: boolean }>();
+const props = defineProps<{ isRegistering: boolean; isAuthLoading: boolean }>();
 const ruleFormRef = ref<FormInstance>();
 
 const validatePass = (rule: any, value: any, callback: any) => {
@@ -78,15 +79,8 @@ const rules = reactive({
 });
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  // await nextTick();
-  // if (!formEl) return;
-  // formEl.validate((valid) => {
-  //   if (valid) {
-      emits("onSubmit", ruleForm.email, ruleForm.pass, ruleForm.username);
-    // } else {
-    //   console.log("error submit!");
-    //   return false;
-    // }
-  // });
+  if (!formEl || props.isAuthLoading) return;
+  formEl.validate();
+  emits("onSubmit", ruleForm.email, ruleForm.pass, ruleForm.username);
 };
 </script>

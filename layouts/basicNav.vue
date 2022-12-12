@@ -4,7 +4,7 @@
       <NavBar @on-open-login-dialog="handleOpenLoginDialog" />
       <slot />
       <!-- Auth Page -->
-      <Auth :is-open="authPageOpening" />
+      <Auth :is-open="authPageOpening" @close-dialog="handleOpenLoginDialog" />
     </div>
   </div>
 </template>

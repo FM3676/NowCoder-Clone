@@ -1,6 +1,7 @@
 export default defineEventHandler(async (event) => {
   const baseURL = useRuntimeConfig().baseURL;
   const body = await readBody(event);
+
   const myHeaders = new Headers();
 
   myHeaders.append("User-Agent", "Apifox/1.0.0 (https://www.apifox.cn)");
@@ -15,40 +16,41 @@ export default defineEventHandler(async (event) => {
     );
   }
 
-  const userData = JSON.stringify({
-    email,
-    password,
-    username,
-  });
+  const registerRawBody = JSON.stringify({ email, password, username });
 
-  const requestOptions: RequestInit = {
+  const registerRequestOptions: RequestInit = {
     method: "POST",
     headers: myHeaders,
-    body: userData,
+    body: registerRawBody,
     redirect: "follow",
   };
 
+  // Register First
   const registerResult = await fetch(
-    baseURL + "/user/register",
-    requestOptions
+    "https://mock.apifox.cn/m2/1957011-0-default/50350710",
+    registerRequestOptions
   );
 
-  if (registerResult.status !== 200)
-    return {
-      stautusCode: registerResult.status,
-      statusText: registerResult.statusText,
-    };
+  if (!registerResult)
+    return sendError(
+      event,
+      createError({ statusCode: 400, statusMessage: "Fail to register" })
+    );
 
-  console.log("registerResult",await registerResult.json());
+  // After Register, login with this account
 
-  // Register succeed, login
-  requestOptions.body = JSON.stringify({
-    password,
-    username,
-  });
+  const loginRawBody = JSON.stringify({ username, password });
+  const loginRequestOption: RequestInit = {
+    method: "POST",
+    headers: myHeaders,
+    body: loginRawBody,
+    redirect: "follow",
+  };
 
+  const loginResult = await fetch(
+    "https://mock.apifox.cn/m2/1957011-0-default/50816890",
+    loginRequestOption
+  );
 
-  const loginResult = await fetch(baseURL + "/user/login", requestOptions);
-  
-  return { loginResult: await loginResult.json() };
+  return await loginResult.json();
 });

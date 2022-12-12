@@ -32,7 +32,7 @@ definePageMeta({
 <style>
 .el-dialog__header,
 .el-dialog__body {
-  padding: 0;
-  padding-bottom: 0;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
 }
 </style>

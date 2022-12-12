@@ -8,7 +8,7 @@ export const withPromiseTryCatch: PromiseClosureGeneric =
   (...args) =>
     new Promise(async (resolve, reject) => {
       try {
-        const result = await fn(args);
+        const result = await fn(...[].concat(args));
         resolve(result);
       } catch (error) {
         reject(error);

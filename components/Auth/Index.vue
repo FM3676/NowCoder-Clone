@@ -43,7 +43,11 @@
           ></span>
         </div>
         <!-- Form -->
-        <AuthForm @on-submit="handleSubmit" :is-registering="isRegistering" />
+        <AuthForm
+          @on-submit="handleSubmit"
+          :is-registering="isRegistering"
+          :is-auth-loading="isAuthLoading"
+        />
       </div>
     </div>
   </ElDialog>
@@ -53,16 +57,24 @@
 import { ElDialog } from "element-plus";
 const { register, login } = useAuth();
 const props = defineProps<{ isOpen: boolean }>();
+const emits = defineEmits(["closeDialog"]);
 const isRegistering = ref<boolean>(true);
+const isAuthLoading = ref(false);
 const changeRegisterOrLogin = () =>
   (isRegistering.value = !isRegistering.value);
 
-const handleSubmit = (email: string, password: string, username: string) => {
-  console.log(isRegistering.value);
-
-  isRegistering.value
-    ? register(email, password, username)
-    : login(username, password);
+const handleSubmit = async (
+  email: string,
+  password: string,
+  username: string
+) => {
+  if (isAuthLoading.value) return;
+  isAuthLoading.value = true;
+  const result = isRegistering.value
+    ? await register(email, password, username)
+    : await login(username, password);
+  isAuthLoading.value = false;
+  if (result) return emits("closeDialog");
 };
 </script>
 
