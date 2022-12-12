@@ -19,7 +19,6 @@
       :key="item.createTime"
       :post="item"
     />
-    <p class="text-center text-sm text-gray-400">暂无更多内容</p>
   </div>
 </template>
 

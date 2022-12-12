@@ -26,13 +26,22 @@
               ></div>
             </ul>
             <UISpinner v-if="isLoading" class="relative left-1/2" />
-
+            <!-- MyPost -->
             <ProfileUsersPost
-              v-if="!isLoading"
+              v-if="!isLoading && lookingFor===0"
               :profile="profile!"
               :posts="postList?.posts!"
               :total="postList?.total!"
             />
+            <!-- Follow Newest Post -->
+            <div v-if="!isLoading && lookingFor===1">
+              <MainSectionItem
+                v-for="item in followNewestPost?.followNewestPosts"
+                :key="item.createTime"
+                :post="item"
+              />
+            </div>
+            <p class="text-center text-sm text-gray-400">暂无更多内容</p>
           </div>
         </main>
         <!-- Right Sidebar -->
@@ -54,7 +63,7 @@ definePageMeta({
   layout: "basic-nav",
 });
 const route = useRoute();
-const { getProfile } = useUsers();
+const { getProfile, getFollowerNewestPost } = useUsers();
 const { getPostList } = usePost();
 const lookingFor = ref(0);
 const isLoading = ref(true);
@@ -63,10 +72,20 @@ const postList = ref<{
   posts: Post[];
   total: number;
 }>();
+const followNewestPost = ref<{ followNewestPosts: Post[]; total: number }>();
 
-const changeLookingFor = (n: number) => {
+const changeLookingFor = async (n: number) => {
   lookingFor.value = n;
+  if (followNewestPost.value) return;
+  handleGetFollowerNewPost();
 };
+
+const handleGetFollowerNewPost = async () => {
+  isLoading.value = true;
+  followNewestPost.value = await getFollowerNewestPost();
+  isLoading.value = false;
+};
+
 onMounted(async () => {
   isLoading.value = true;
   profile.value = await getProfile(parseInt(route.params.id as string));
