@@ -25,6 +25,7 @@
           {{ item }}
         </li>
       </ul>
+      <UISpinner v-if="isLoading" class="relative left-1/2" />
       <MainSectionItem
         v-for="item in postList"
         :key="item.createTime"
@@ -45,12 +46,15 @@ const activeOrderType = ref(0);
 const { getPostList, getHostPostList } = usePost();
 const postList = ref<Post[]>([]);
 const postListTotal = ref(0);
+const isLoading = ref(true);
 
 onMounted(async () => {
+  isLoading.value = true;
   const { posts: hotPost, total: hotPostTotal } = await getHostPostList(1, 1);
   const { posts, total } = await getPostList(1, 1);
   postList.value = hotPost.concat(posts);
   postListTotal.value = hotPostTotal + total;
+  isLoading.value = false;
 });
 </script>
 

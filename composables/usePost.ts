@@ -81,6 +81,24 @@ export default () => {
     return data;
   })<number>;
 
+  const searchPost = withPromiseTryCatch(
+    async (pageNum: number, pageSize: number, searchContent: string) => {
+      const { data } = await $fetch("/api/post/search", {
+        method: "GET",
+        query: { pageNum, pageSize, searchContent },
+      });
+      console.log({
+        posts: data.rows,
+        total: data.total,
+      });
+
+      return {
+        posts: data,
+        total: data.length,
+      };
+    }
+  )<{ posts: Post[]; total: number }>;
+
   return {
     getPostComments,
     publishPost,
@@ -89,5 +107,6 @@ export default () => {
     addComment,
     likeThePost,
     getHostPostList,
+    searchPost,
   };
 };
