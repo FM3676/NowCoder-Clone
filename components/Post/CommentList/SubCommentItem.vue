@@ -19,6 +19,11 @@
         :root-id="comment.id"
         :to-comment-user-id="comment.createBy"
       />
+      <div
+        class="w-full bg-gray-200 relative -bottom-2"
+        style="padding-top: 1px"
+        :hidden="isTheLast"
+      ></div>
     </div>
   </div>
 </template>
@@ -26,7 +31,7 @@
 <script setup lang="ts">
 import { Comment } from "~~/interfaces/postInterface";
 
-defineProps<{ comment: Comment }>();
+defineProps<{ comment: Comment; isTheLast: boolean }>();
 </script>
 
 <style scoped></style>

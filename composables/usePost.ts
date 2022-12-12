@@ -59,5 +59,22 @@ export default () => {
     }
   );
 
-  return { getPostComments, publishPost, getPostList, getPostById, addComment };
+  const likeThePost = withPromiseTryCatch(async (eneityId: number) => {
+    const token = useAuth().useAuthToken();
+    const { data } = await $fetch("/api/post/like", {
+      method: "GET",
+      query: { eneityId, token },
+    });
+
+    return data;
+  })<number>;
+
+  return {
+    getPostComments,
+    publishPost,
+    getPostList,
+    getPostById,
+    addComment,
+    likeThePost,
+  };
 };

@@ -14,6 +14,8 @@
     <PostFooter
       :comment-count="props.postDetail.commentCount"
       :liked-count="props.postDetail.liked"
+      :entity-id="props.postDetail.id"
+      :is-liked="postDetail.like"
     />
   </div>
 </template>
