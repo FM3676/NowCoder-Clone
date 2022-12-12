@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen bg-white" :class="defaultTransition">
+  <div class="flex flex-col h-full bg-white" :class="defaultTransition">
     <!-- First Level -->
     <ul
       v-for="(first, index) in dummyData"
