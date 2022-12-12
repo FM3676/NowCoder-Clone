@@ -6,7 +6,8 @@
       <span
         class="w-10 h-10 rounded-full overflow-hidden inline-flex justify-center items-center"
       >
-        <img src="https://static.nowcoder.com/fe/file/logo/1.png" />
+        <img :src="props.headerUrl" />
+        <!-- "https://static.nowcoder.com/fe/file/logo/1.png" -->
       </span>
 
       <span class="inline-flex flex-col ml-4 -translate-y-2">
@@ -30,6 +31,7 @@ const props = withDefaults(
     showFollowButton: boolean;
     username: string;
     createdTime: string;
+    headerUrl:string
   }>(),
   {
     showFollowButton: false,

@@ -5,7 +5,7 @@
   >
     <input
       v-model="reply"
-      class="rounded-md flex-grow focus:outline-none focus:border focus:border-green-350 p-2"
+      class="rounded-md flex-grow border outline-none  focus:border-green-350 p-2"
       type="text"
       placeholder="输入你的评论吧"
     />

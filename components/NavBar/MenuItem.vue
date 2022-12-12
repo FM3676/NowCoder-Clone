@@ -13,7 +13,7 @@
       <li
         v-for="item in props.sub"
         :key="item"
-        class="flex justify-start items-center py-2 px-1 rounded-md cursor-pointer hover:bg-gray-300 flex-nowrap"
+        class="flex justify-start text-gray-600 items-center py-2 px-1 rounded-md cursor-pointer hover:bg-gray-300 flex-nowrap"
         :class="calcSubItemWidth()"
       >
         {{ item }}

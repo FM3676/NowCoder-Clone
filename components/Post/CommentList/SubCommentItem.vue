@@ -10,11 +10,15 @@
       {{ comment.username }} <span class="text-gray-300 mx-2">回复</span>
       {{ comment.toCommentUserName }}
     </div>
-    <div class="text-sm pl-8 ">
+    <div class="text-sm pl-8">
       <!-- Comment -->
-      <div class="mt-2">{{comment.content}}</div>
+      <div class="mt-2">{{ comment.content }}</div>
       <!-- Footer -->
-      <PostCommentFooter />
+      <PostCommentFooter
+        :entity-id="comment.entityId"
+        :root-id="comment.id"
+        :to-comment-user-id="comment.createBy"
+      />
     </div>
   </div>
 </template>

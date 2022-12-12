@@ -1,11 +1,13 @@
 export interface Post {
   commentCount: number;
   content: string;
+  createdTime: string;
   createTime: string;
+  headerUrl: string;
   id: number;
   like: boolean;
   liked: number;
-  score: number | number;
+  score: number;
   status: number;
   title: string;
   type: number;
@@ -18,11 +20,12 @@ export interface Comment {
   createBy: number;
   createTime: string;
   entityId: number;
+  headUrl: string;
   id: number;
   rootId: number;
   toCommentId: number;
   toCommentUserId: number;
-  toCommentUserName?: string;
+  toCommentUserName: string;
   username: string;
 }
 

@@ -7,7 +7,7 @@
       </main>
       <!-- Right Sidebar -->
       <aside class="col-span-3">
-        <div class="sticky top-0">
+        <div class="sticky top-16">
           <SideBarRight />
         </div>
       </aside>

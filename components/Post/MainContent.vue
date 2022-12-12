@@ -5,12 +5,16 @@
       :created-time="props.postDetail.createTime"
       :username="props.postDetail.username"
       :show-follow-button="true"
+      :header-url="props.postDetail.headerUrl"
     />
     <!-- MarkDown Viewer -->
     <h1 class="font-bold text-2xl mb-4">{{ props.postDetail.title }}</h1>
     <Viewer :plugins="plugins" :value="props.postDetail.content" />
     <!-- Footer Icons -->
-    <PostFooter />
+    <PostFooter
+      :comment-count="props.postDetail.commentCount"
+      :liked-count="props.postDetail.liked"
+    />
   </div>
 </template>
 
