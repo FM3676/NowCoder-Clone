@@ -37,6 +37,17 @@ export default () => {
     });
     return data;
   })<UserProfile>;
+
+  const getUserFollowFansCount = withPromiseTryCatch(async (id: number) => {
+    const token = useAuthToken();
+    const { data } = await $fetch("/api/users/getFollowNum", {
+      method: "GET",
+      query: { token, id },
+    });
+
+    return data;
+  })<{ follower: number; fans: number }>;
+
   return {
     getProfile,
     getFollowerNewestPost,
@@ -44,5 +55,6 @@ export default () => {
     useOffest: useOffset,
     setMinTime,
     setOffest,
+    getUserFollowFansCount,
   };
 };

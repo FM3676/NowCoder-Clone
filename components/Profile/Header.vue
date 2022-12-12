@@ -20,12 +20,12 @@
         <div class="flex items-center">
           <div class="h-12 w-28 align-middle text-center">
             <div class="text-lg text-gray-600">粉丝</div>
-            <div>0</div>
+            <div>{{ props.fans }}</div>
           </div>
           <div class="h-4 bg-gray-400" style="width: 1px"></div>
           <div class="h-12 w-28 align-middle text-center">
             <div class="text-lg text-gray-600">关注</div>
-            <div>0</div>
+            <div>{{ props.follows }}</div>
           </div>
         </div>
       </div>
@@ -38,7 +38,11 @@
 <script setup lang="ts">
 import { UserProfile } from "~~/interfaces/userInterface";
 
-defineProps<{ profile: UserProfile }>();
+const props = defineProps<{
+  profile: UserProfile;
+  fans: number;
+  follows: number;
+}>();
 </script>
 
 <style scoped>

@@ -1,7 +1,11 @@
 <template>
   <div>
     <NuxtLayout name="basic-nav">
-      <ProfileHeader :profile="profile!" />
+      <ProfileHeader
+        :profile="profile!"
+        :fans="followAndFansCount.fans"
+        :follows="followAndFansCount.follower"
+      />
       <div
         class="grid grid-cols-12 mx-auto gap-5 pt-4 bg-gray-100"
         style="width: 1200px"
@@ -28,13 +32,13 @@
             <UISpinner v-if="isLoading" class="relative left-1/2" />
             <!-- MyPost -->
             <ProfileUsersPost
-              v-if="!isLoading && lookingFor===0"
+              v-if="!isLoading && lookingFor === 0"
               :profile="profile!"
               :posts="postList?.posts!"
               :total="postList?.total!"
             />
             <!-- Follow Newest Post -->
-            <div v-if="!isLoading && lookingFor===1">
+            <div v-if="!isLoading && lookingFor === 1">
               <MainSectionItem
                 v-for="item in followNewestPost?.followNewestPosts"
                 :key="item.createTime"
@@ -63,11 +67,18 @@ definePageMeta({
   layout: "basic-nav",
 });
 const route = useRoute();
-const { getProfile, getFollowerNewestPost } = useUsers();
+const { getProfile, getFollowerNewestPost, getUserFollowFansCount } =
+  useUsers();
 const { getPostList } = usePost();
 const lookingFor = ref(0);
 const isLoading = ref(true);
-const profile = ref({} as UserProfile);
+const followAndFansCount = ref(
+  {} as {
+    follower: number;
+    fans: number;
+  }
+);
+let profile = ref({} as UserProfile);
 const postList = ref<{
   posts: Post[];
   total: number;
@@ -90,6 +101,9 @@ onMounted(async () => {
   isLoading.value = true;
   profile.value = await getProfile(parseInt(route.params.id as string));
   postList.value = await getPostList(1, 10, profile.value.id);
+  followAndFansCount.value = await getUserFollowFansCount(
+    parseInt(route.params.id as string)
+  );
   isLoading.value = false;
 });
 </script>
