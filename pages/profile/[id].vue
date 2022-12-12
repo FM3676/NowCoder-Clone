@@ -5,6 +5,7 @@
         :profile="profile!"
         :fans="followAndFansCount.fans"
         :follows="followAndFansCount.follower"
+        :id="queryId"
       />
       <div
         class="grid grid-cols-12 mx-auto gap-5 pt-4 bg-gray-100"
@@ -67,6 +68,7 @@ definePageMeta({
   layout: "basic-nav",
 });
 const route = useRoute();
+const queryId = parseInt(route.params.id as string);
 const { getProfile, getFollowerNewestPost, getUserFollowFansCount } =
   useUsers();
 const { getPostList } = usePost();
@@ -99,11 +101,9 @@ const handleGetFollowerNewPost = async () => {
 
 onMounted(async () => {
   isLoading.value = true;
-  profile.value = await getProfile(parseInt(route.params.id as string));
+  profile.value = await getProfile(queryId);
   postList.value = await getPostList(1, 10, profile.value.id);
-  followAndFansCount.value = await getUserFollowFansCount(
-    parseInt(route.params.id as string)
-  );
+  followAndFansCount.value = await getUserFollowFansCount(queryId);
   isLoading.value = false;
 });
 </script>

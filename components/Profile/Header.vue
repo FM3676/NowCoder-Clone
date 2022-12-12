@@ -29,6 +29,15 @@
           </div>
         </div>
       </div>
+      <!-- Follow Button -->
+      <button
+        v-if="!isMineProfilePage"
+        @click="handleFollow"
+        class="absolute right-6 bottom-8 text-white text-xl rounded-lg py-2 text-center w-44"
+        style="background: linear-gradient(135deg, #00dcc2, #00dc93)"
+      >
+        {{ isFollowed ? "已关注" : "关注" }}
+      </button>
     </div>
     <!-- Mask -->
     <div class="mask-bg"></div>
@@ -37,12 +46,34 @@
 
 <script setup lang="ts">
 import { UserProfile } from "~~/interfaces/userInterface";
-
+const { follow, checkFollow } = useUsers();
+const { useAuthUser } = useAuth();
 const props = defineProps<{
   profile: UserProfile;
   fans: number;
   follows: number;
+  id: number;
 }>();
+const user = useAuthUser();
+const isMineProfilePage = ref(true);
+const isFollowed = ref(false);
+const isHandling = ref(false);
+
+onMounted(async () => {
+  isFollowed.value = await checkFollow(props.id);
+  isMineProfilePage.value =  props.id === user.value.id;
+  console.log(user.value.id);
+});
+
+const handleFollow = async () => {
+  if (isHandling.value) return;
+  isHandling.value = true;
+  const result = await follow(props.id, isFollowed.value);
+  console.log(result);
+  if (!result) return;
+  isFollowed.value = !isFollowed.value;
+  isHandling.value = false;
+};
 </script>
 
 <style scoped>
