@@ -1,3 +1,4 @@
+import { withPromiseTryCatch } from "./../utils/hooksUtils";
 import { UserProfile } from "./../interfaces/userInterface";
 export default () => {
   const useAuthToken = () => useState<string>("auth_token");
@@ -22,7 +23,7 @@ export default () => {
       setToken(data.token);
       setUser(data.userInfo);
       localStorage.setItem("token", data.token);
-      localStorage.setItem("userInfo",JSON.stringify(data.userInfo) );
+      localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
       return data;
     }
   );
@@ -41,6 +42,20 @@ export default () => {
     }
   );
 
+  const logout = withPromiseTryCatch(async () => {
+    const { data } = await $fetch("/api/auth/logout", {
+      method: "POST",
+      body: {
+        token: useAuthToken().value,
+      },
+    });
+    setToken("");
+    setUser({} as UserProfile);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userInfo");
+    return data;
+  });
+
   return {
     useAuthToken,
     useAuthUser,
@@ -48,5 +63,6 @@ export default () => {
     setUser,
     register,
     login,
+    logout,
   };
 };

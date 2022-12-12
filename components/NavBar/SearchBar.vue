@@ -28,7 +28,7 @@
 const searchContent = ref("");
 const handleSearch = () => {
   if (!searchContent.value) return;
-  useRouter().push({ path: "search", query: { q: searchContent.value } });
+  useRouter().push({ path: "/search", query: { q: searchContent.value } });
   searchContent.value;
 };
 </script>

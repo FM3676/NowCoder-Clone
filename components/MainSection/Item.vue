@@ -23,7 +23,7 @@
     <!-- Main -->
     <div class="flex flex-col justify-center gap-2">
       <div class="flex justify-start items-center">
-        <NuxtLink :to="`post/${props.post.id}`">
+        <NuxtLink :to="`/post/${props.post.id}`">
           <h2
             class="text-lmd font-bold text-black cursor-pointer hover:text-green-350"
           >
