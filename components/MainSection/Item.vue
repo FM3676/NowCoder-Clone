@@ -17,7 +17,7 @@
       </div>
       <!-- Date -->
       <div class="text-gray-300 text-xs self-end">
-        {{ props.post.createTime.slice(4) }}
+        {{ props.post.createTime.slice(5) }}
       </div>
     </div>
     <!-- Main -->

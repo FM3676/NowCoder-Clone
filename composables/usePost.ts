@@ -40,6 +40,18 @@ export default () => {
     }
   )<{ posts: Post[]; total: number }>;
 
+  const getHostPostList = withPromiseTryCatch(
+    async (pageNum: number, pageSize: number) => {
+      const { data } = await $fetch("/api/post/getHostDisscussPost", {
+        method: "GET",
+      });
+      return {
+        posts: data.rows,
+        total: data.total,
+      };
+    }
+  )<{ posts: Post[]; total: number }>;
+
   const getPostById = withPromiseTryCatch(async (postId: string) => {
     const { data } = await $fetch("/api/post/getPostById", {
       method: "GET",
@@ -76,5 +88,6 @@ export default () => {
     getPostById,
     addComment,
     likeThePost,
+    getHostPostList,
   };
 };

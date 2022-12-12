@@ -42,16 +42,15 @@ const orderTypes = ["默认", "最新", "最热", "精华"];
 const activeNavOption = ref(0);
 const activeOrderType = ref(0);
 
-const { getPostList } = usePost();
+const { getPostList, getHostPostList } = usePost();
 const postList = ref<Post[]>([]);
 const postListTotal = ref(0);
 
-onMounted(() => {
-  getPostList(1, 1).then((res) => {
-    const PostListResult = res;
-    postList.value = PostListResult.posts;
-    postListTotal.value = PostListResult.total;
-  });
+onMounted(async () => {
+  const { posts: hotPost, total: hotPostTotal } = await getHostPostList(1, 1);
+  const { posts, total } = await getPostList(1, 1);
+  postList.value = hotPost.concat(posts);
+  postListTotal.value = hotPostTotal + total;
 });
 </script>
 
