@@ -58,6 +58,16 @@ export default () => {
     return data;
   });
 
+  const checkFollow = withPromiseTryCatch(async (id: number) => {
+    const token = useAuthToken();
+    const { data } = await $fetch("/api/users/checkFollow", {
+      method: "GET",
+      query: { token: JSON.stringify(token), id },
+    });
+    console.log(data);
+    return data;
+  });
+
   return {
     getProfile,
     getFollowerNewestPost,
@@ -67,5 +77,6 @@ export default () => {
     setOffest,
     getUserFollowFansCount,
     follow,
+    checkFollow,
   };
 };
