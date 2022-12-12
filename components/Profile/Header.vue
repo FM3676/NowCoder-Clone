@@ -19,12 +19,12 @@
         <span class="font-bold text-xl">{{ profile.username }}</span>
         <div class="flex items-center">
           <div class="h-12 w-28 align-middle text-center">
-            <div class="text-sm text-gray-600">粉丝</div>
+            <div class="text-lg text-gray-600">粉丝</div>
             <div>0</div>
           </div>
-          <div class="h-4 bg-gray-100" style="width: 1px"></div>
+          <div class="h-4 bg-gray-400" style="width: 1px"></div>
           <div class="h-12 w-28 align-middle text-center">
-            <div class="text-sm text-gray-600">关注</div>
+            <div class="text-lg text-gray-600">关注</div>
             <div>0</div>
           </div>
         </div>

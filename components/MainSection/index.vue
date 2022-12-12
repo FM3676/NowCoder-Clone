@@ -50,8 +50,8 @@ const isLoading = ref(true);
 
 onMounted(async () => {
   isLoading.value = true;
-  const { posts: hotPost, total: hotPostTotal } = await getHostPostList(1, 1);
-  const { posts, total } = await getPostList(1, 1);
+  const { posts: hotPost, total: hotPostTotal } = await getHostPostList(1, 10);
+  const { posts, total } = await getPostList(1, 10);
   postList.value = hotPost.concat(posts);
   postListTotal.value = hotPostTotal + total;
   isLoading.value = false;

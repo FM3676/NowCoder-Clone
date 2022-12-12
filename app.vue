@@ -2,6 +2,7 @@
   <div class="bg-gray-100 min-w-min">
     <!-- App -->
     <div class="min-h-screen">
+      <NuxtLoadingIndicator />
       <NuxtPage :key="$route.fullPath" />
       <footer class="mt-8 w-full py-12 bg-gray-800">
         <p

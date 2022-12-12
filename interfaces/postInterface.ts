@@ -1,7 +1,6 @@
 export interface Post {
   commentCount: number;
   content: string;
-  createdTime: string;
   createTime: string;
   headerUrl: string;
   id: number;

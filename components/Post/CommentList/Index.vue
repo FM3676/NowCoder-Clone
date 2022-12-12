@@ -15,7 +15,7 @@ const props = defineProps<{ postId: string }>();
 const { getPostComments } = usePost();
 const commentList = ref<{ comments: FirstLevelComment[]; total: number }>();
 onMounted(async () => {
-  commentList.value = await getPostComments(1, 1, props.postId);
+  commentList.value = await getPostComments(1, 10, props.postId);
 });
 </script>
 
