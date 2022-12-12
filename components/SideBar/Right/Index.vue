@@ -17,7 +17,7 @@
         </NuxtLink>
       </div>
       <NuxtLink
-        to="/"
+        to="/creation/MarkDown"
         class="bg-green-350 rounded-md text-white w-full block text-sm text-center py-2 mb-3 hover:bg-green-250"
         >进入创作者中心</NuxtLink
       >
