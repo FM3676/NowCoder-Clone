@@ -32,7 +32,16 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { getNoltices, setNotices, useNotices } = useNotice();
+const getLatestNotices = async () => {
+  const result = await getNoltices();
+  setNotices(result);
+  console.log(useNotices().value);
+};
+onMounted(() => getLatestNotices());
+onBeforeUpdate(() => getLatestNotices());
+</script>
 <style>
 .el-drawer {
   border-top-left-radius: 1rem;
@@ -40,7 +49,7 @@
   padding: 1rem;
 }
 
-.el-drawer__body{
+.el-drawer__body {
   padding-top: 0 !important;
 }
 </style>

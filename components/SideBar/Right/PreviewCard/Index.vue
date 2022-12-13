@@ -21,13 +21,14 @@ const props = withDefaults(
 );
 </script>
 <style scoped>
-.module-head h1:before{
-    background: #ff6547;
-    content: "";
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    margin-right: 5px;
-    margin-bottom: 2px;
-    vertical-align: middle;}
+.module-head h1:before {
+  background: #ff6547;
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  vertical-align: middle;
+}
 </style>

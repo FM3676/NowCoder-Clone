@@ -55,7 +55,12 @@
       </g>
     </svg>
   </span>
-  <span class="text-gray-400 text-sm ml-5 cursor-pointer">
+  <!-- Notifacation -->
+  <span
+    :class="[{ notifaction: hasNotice }]"
+    class="text-gray-400 text-sm ml-5 cursor-pointer relative"
+    @click="handleShowNotice"
+  >
     <svg
       data-v-6acb0236=""
       focusable="false"
@@ -98,22 +103,42 @@
   >
     退出登录
   </button>
+
+  <!-- Notices Drawer -->
+  <NotificationDrawer
+    :show-drawer="showNotice"
+    :like-notice="noticesData.like"
+    :follow-notice="noticesData.follow"
+    :comment-notice="noticesData.comment"
+  />
 </template>
 
 <script setup lang="ts">
 import { ArrowDown } from "@element-plus/icons-vue";
 const { useAuthUser, logout } = useAuth();
 const user = useAuthUser();
-const avatar =
-  // user
-  // ? user.value.headerUrl
-  // :
-  "https://images.nowcoder.com/head/1photo.jpg?x-oss-process=image/resize,m_mfit,h_100,w_100";
+const avatar = user
+  ? user.value.headerUrl
+  : "https://images.nowcoder.com/head/1photo.jpg?x-oss-process=image/resize,m_mfit,h_100,w_100";
 
 const navToProfile = () => navigateTo(`/profile/${user.value.id}`);
 const handleLogOut = () => {
   logout();
 };
+
+/* Notifacation */
+const { useNotices } = useNotice();
+const noticesData = useNotices();
+const hasNotice = ref(false);
+const showNotice = ref(false);
+const handleShowNotice = () => {
+  showNotice.value = !showNotice.value;
+  hasNotice.value = false;
+};
+
+watch(noticesData, () => {
+  hasNotice.value = true;
+});
 </script>
 
 <style scoped>
@@ -124,5 +149,16 @@ const handleLogOut = () => {
 .logout:hover {
   max-height: 99999px;
   padding: 0.25rem;
+}
+
+.notifaction::after {
+  content: "";
+  background-color: rgb(255, 113, 113);
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  border-radius: 9999px;
+  top: 0%;
+  right: -2px;
 }
 </style>
