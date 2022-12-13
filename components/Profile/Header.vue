@@ -20,7 +20,7 @@
         <div class="flex items-center">
           <div
             class="h-12 w-28 align-middle text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
-            @click="emits('onCheckFollowOrFans', 'fans')"
+            @click="emits('onCheckFollowOrFans', '粉丝')"
           >
             <p>粉丝</p>
             <p>{{ props.fans }}</p>
@@ -28,7 +28,7 @@
           <div class="h-4 bg-gray-400" style="width: 1px"></div>
           <div
             class="h-12 w-28 align-middle text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
-            @click="emits('onCheckFollowOrFans', 'follow')"
+            @click="emits('onCheckFollowOrFans', '关注')"
           >
             <p>关注</p>
             <p>{{ props.follows }}</p>

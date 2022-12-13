@@ -80,8 +80,10 @@ const {
   getFollowerNewestPost,
   getUserFollowFansCount,
   getCommonFollow,
+  getFans,
 } = useUsers();
 const { getPostList } = usePost();
+/* Post And Follower's Newsest Post */
 const lookingFor = ref(0);
 const isLoading = ref(true);
 const followAndFansCount = ref(
@@ -99,9 +101,8 @@ const followNewestPost = ref<{ followNewestPosts: Post[]; total: number }>();
 
 /* Check Follower $ Fans */
 const showFollowerFansDrawer = ref(false);
-const renderTitle = ref("共同关注");
+const renderTitle = ref("");
 const renderDrawerList = ref<UserProfile[]>([]);
-const commonFollowList = ref<UserProfile[]>([]);
 
 const changeLookingFor = async (n: number) => {
   lookingFor.value = n;
@@ -115,17 +116,20 @@ const handleGetFollowerNewPost = async () => {
   isLoading.value = false;
 };
 
-const handleQueryFollowOrFans = (query: string) => {
+const handleQueryFollowOrFans = async (query: string) => {
   showFollowerFansDrawer.value = !showFollowerFansDrawer.value;
-  handleQueryCommonFollowers();
+  renderTitle.value = query;
+  if (query === "粉丝")
+    return (renderDrawerList.value = await handlQueryFans());
+
+  // handleQueryCommonFollowers();
 };
 
 const handlQueryFollowers = async () => {};
 
-const handleQueryCommonFollowers = async () => {
-  commonFollowList.value = await getCommonFollow(queryId);
-  renderDrawerList.value = commonFollowList.value;
-};
+const handlQueryFans = async () => await getFans(queryId);
+
+const handleQueryCommonFollowers = async () => await getCommonFollow(queryId);
 
 onMounted(async () => {
   isLoading.value = true;
@@ -136,6 +140,4 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
