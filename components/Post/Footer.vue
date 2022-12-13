@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from "element-plus";
 import {
   Star,
   ChatLineRound,
@@ -45,11 +46,18 @@ const changeableLikeCount = ref(props.commentCount);
 const isLiked = ref(props.isLiked);
 
 const handleLikeThePost = async () => {
-  const result = await likeThePost(props.entityId);
-  if (result) {
-    changeableLikeCount.value = result;
-    isLiked.value = !isLiked.value;
-  }
+  likeThePost(props.entityId)
+    .then((result) => {
+      changeableLikeCount.value = result;
+      isLiked.value = !isLiked.value;
+    })
+    .catch(() =>
+      ElNotification({
+        title: "No Auth!",
+        message: "Login First",
+        type: "warning",
+      })
+    );
 };
 </script>
 

@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from "element-plus";
 const { follow, checkIsFollowed } = useUsers();
 const props = withDefaults(
   defineProps<{
@@ -50,10 +51,16 @@ onMounted(async () => {
 const handleFollow = async () => {
   if (isHandling.value) return;
   isHandling.value = true;
-  const result = await follow(props.id, isFollowed.value);
-  console.log(result);
-  if (!result) return;
-  isFollowed.value = !isFollowed.value;
+  follow(props.id, isFollowed.value)
+    .then(() => (isFollowed.value = !isFollowed.value))
+    .catch(() =>
+      ElNotification({
+        title: "No Auth!",
+        message: "Login First",
+        type: "warning",
+      })
+    );
+
   isHandling.value = false;
 };
 </script>
