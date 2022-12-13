@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from "element-plus";
 import { Editor } from "@bytemd/vue-next";
 import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight-ssr";
@@ -28,6 +29,7 @@ import math from "@bytemd/plugin-math-ssr";
 import "~~/assets/CodeMirrow.css";
 import "~~/assets/MdPreview.css";
 const { publishPost } = usePost();
+const router = useRouter();
 
 useHead({
   link: [
@@ -43,17 +45,21 @@ const content = ref("");
 const title = ref("");
 const isPublishing = ref(false);
 const handleChange = (v: string) => (content.value = v);
-const handlePostPublish = () => {
+const handlePostPublish = async () => {
   isPublishing.value = true;
   publishPost(title.value, content.value)
     .then((res) => {
-      console.log(res);
-      if (res) useRouter().push("/");
-      isPublishing.value = false;
+      ElNotification({ title: "Publish Successfully", type: "success" });
+      router.push("/");
     })
-    .catch((error) => {
-      throw new Error(error);
-    });
+    .catch(() =>
+      ElNotification({
+        title: "No Auth!",
+        message: "Login First",
+        type: "warning",
+      })
+    );
+  isPublishing.value = false;
 };
 </script>
 
