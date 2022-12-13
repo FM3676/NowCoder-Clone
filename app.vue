@@ -37,7 +37,6 @@ const { getNoltices, setNotices, useNotices } = useNotice();
 const getLatestNotices = async () => {
   const result = await getNoltices();
   setNotices(result);
-  console.log(useNotices().value);
 };
 onMounted(() => getLatestNotices());
 onBeforeUpdate(() => getLatestNotices());

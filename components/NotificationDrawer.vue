@@ -30,8 +30,11 @@
           <Pointer class="w-16 h-16 mr-4" v-if="selection === 0" />
           <ChatLineRound class="w-16 h-16 mr-4" v-if="selection === 1" />
           <Star class="w-16 h-16 mr-4" v-if="selection === 2" />
-          {{ renderList[selection].message.fromUserName }}
-          <span class="font-bold"> {{ titleList[selection] }} </span> 了你
+          您有
+          <span class="font-bold mx-2">
+            {{ renderList[selection].unread }}
+          </span>
+          个新的{{ titleList[selection] }}
         </li>
       </ul>
     </ElDrawer>
@@ -61,7 +64,7 @@ const renderList = ref([
 ]);
 
 const titleList = ["点赞", "评论", "关注"];
-const selectedItemClass = ref("");
+const selectedItemClass = ref("selecte-item-0");
 </script>
 
 <style scoped>

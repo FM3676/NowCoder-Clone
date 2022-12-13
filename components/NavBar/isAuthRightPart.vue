@@ -7,12 +7,12 @@
     创作者中心
     <ArrowDown style="width: 1rem; height: 1rem; margin-left: 0.5rem" />
     <ul
-      class="max-h-0 w-full subPosition group-hover:flex group-hover:max-h-screen hover:flex hover:max-h-screen group-hover:delay-300 group-hover:p-1 hover:p-1 overflow-hidden bg-white rounded-md absolute flex-col shadow-lg text-sm max-w-none"
+      class="max-h-0 delay-300 w-full subPosition group-hover:flex group-hover:max-h-screen hover:flex hover:max-h-screen group-hover:delay-300 group-hover:p-1 hover:p-1 overflow-hidden bg-white rounded-md absolute flex-col shadow-lg text-sm max-w-none"
     >
       <li
         class="flex justify-center items-center py-2 px-1 rounded-md cursor-pointer hover:bg-green-250 text-black text-sm"
       >
-        <NuxtLink>
+        <NuxtLink to="/creation/MarkDown">
           <img
             src="https://static.nowcoder.com/fe/file/oss/1658118477816UCUNV.png"
             class="h-6 w-6 inline-block"
@@ -22,7 +22,7 @@
       <li
         class="flex justify-center items-center py-2 px-1 rounded-md cursor-pointer hover:bg-green-250 text-black text-sm"
       >
-        <NuxtLink>
+        <NuxtLink to="/creation/MarkDown">
           <img
             src="https://static.nowcoder.com/fe/file/oss/1658118495689CNIDW.png"
             class="h-6 w-6 inline-block"
@@ -99,7 +99,7 @@
   <button
     @click="handleLogOut"
     class="max-h-0 overflow-hidden absolute w-20 text-center top-16 bg-white rounded-lg transition-all cursor-pointer delay-200 logout"
-    style="left: 1232px"
+    style="left: 1164px"
   >
     退出登录
   </button>
