@@ -6,6 +6,7 @@
         :fans="followAndFansCount.fans"
         :follows="followAndFansCount.follower"
         :id="queryId"
+        @on-check-follow-or-fans="handleQueryFollowOrFans"
       />
       <div
         class="grid grid-cols-12 mx-auto gap-5 pt-4 bg-gray-100"
@@ -56,6 +57,11 @@
           </div>
         </aside>
       </div>
+      <LazyProfileFollowFansDrawer
+        :show-drawer="showFollowerFansDrawer"
+        :title="renderTitle"
+        :render-list="renderDrawerList"
+      />
     </NuxtLayout>
   </div>
 </template>
@@ -69,8 +75,12 @@ definePageMeta({
 });
 const route = useRoute();
 const queryId = parseInt(route.params.id as string);
-const { getProfile, getFollowerNewestPost, getUserFollowFansCount } =
-  useUsers();
+const {
+  getProfile,
+  getFollowerNewestPost,
+  getUserFollowFansCount,
+  getCommonFollow,
+} = useUsers();
 const { getPostList } = usePost();
 const lookingFor = ref(0);
 const isLoading = ref(true);
@@ -87,6 +97,12 @@ const postList = ref<{
 }>();
 const followNewestPost = ref<{ followNewestPosts: Post[]; total: number }>();
 
+/* Check Follower $ Fans */
+const showFollowerFansDrawer = ref(false);
+const renderTitle = ref("共同关注");
+const renderDrawerList = ref<UserProfile[]>([]);
+const commonFollowList = ref<UserProfile[]>([]);
+
 const changeLookingFor = async (n: number) => {
   lookingFor.value = n;
   if (followNewestPost.value) return;
@@ -99,6 +115,18 @@ const handleGetFollowerNewPost = async () => {
   isLoading.value = false;
 };
 
+const handleQueryFollowOrFans = (query: string) => {
+  showFollowerFansDrawer.value = !showFollowerFansDrawer.value;
+  handleQueryCommonFollowers();
+};
+
+const handlQueryFollowers = async () => {};
+
+const handleQueryCommonFollowers = async () => {
+  commonFollowList.value = await getCommonFollow(queryId);
+  renderDrawerList.value = commonFollowList.value;
+};
+
 onMounted(async () => {
   isLoading.value = true;
   profile.value = await getProfile(queryId);
@@ -108,4 +136,6 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-const { follow, checkFollow } = useUsers();
+const { follow, checkIsFollowed } = useUsers();
 const props = withDefaults(
   defineProps<{
     showFollowButton: boolean;
@@ -44,7 +44,7 @@ const isFollowed = ref(false);
 const isHandling = ref(false);
 
 onMounted(async () => {
-  isFollowed.value = await checkFollow(props.id);
+  isFollowed.value = await checkIsFollowed(props.id);
 });
 
 const handleFollow = async () => {

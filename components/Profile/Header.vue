@@ -18,14 +18,20 @@
       <div class="flex pt-12 ml-44 h-24 items-center justify-between">
         <span class="font-bold text-xl">{{ profile.username }}</span>
         <div class="flex items-center">
-          <div class="h-12 w-28 align-middle text-center">
-            <div class="text-lg text-gray-600">粉丝</div>
-            <div>{{ props.fans }}</div>
+          <div
+            class="h-12 w-28 align-middle text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
+            @click="emits('onCheckFollowOrFans', 'fans')"
+          >
+            <p>粉丝</p>
+            <p>{{ props.fans }}</p>
           </div>
           <div class="h-4 bg-gray-400" style="width: 1px"></div>
-          <div class="h-12 w-28 align-middle text-center">
-            <div class="text-lg text-gray-600">关注</div>
-            <div>{{ props.follows }}</div>
+          <div
+            class="h-12 w-28 align-middle text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
+            @click="emits('onCheckFollowOrFans', 'follow')"
+          >
+            <p>关注</p>
+            <p>{{ props.follows }}</p>
           </div>
         </div>
       </div>
@@ -46,8 +52,9 @@
 
 <script setup lang="ts">
 import { UserProfile } from "~~/interfaces/userInterface";
-const { follow, checkFollow } = useUsers();
+const { follow, checkIsFollowed } = useUsers();
 const { useAuthUser } = useAuth();
+const emits = defineEmits(["onCheckFollowOrFans"]);
 const props = defineProps<{
   profile: UserProfile;
   fans: number;
@@ -60,8 +67,8 @@ const isFollowed = ref(false);
 const isHandling = ref(false);
 
 onMounted(async () => {
-  isFollowed.value = await checkFollow(props.id);
-  isMineProfilePage.value =  props.id === user.value.id;
+  isFollowed.value = await checkIsFollowed(props.id);
+  isMineProfilePage.value = props.id === user.value.id;
   console.log(user.value.id);
 });
 

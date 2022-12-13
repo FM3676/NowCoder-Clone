@@ -33,3 +33,14 @@
   </div>
 </template>
 <script setup lang="ts"></script>
+<style>
+.el-drawer {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding: 1rem;
+}
+
+.el-drawer__body{
+  padding-top: 0 !important;
+}
+</style>

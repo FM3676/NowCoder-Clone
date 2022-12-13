@@ -30,43 +30,56 @@ export default () => {
   })<{ followNewestPosts: Post[]; total: number }>;
 
   const getProfile = withPromiseTryCatch(async (id: number) => {
-    const token = useAuthToken();
+    const token = useAuthToken().value;
     const { data } = await $fetch("/api/users/profile", {
       method: "GET",
-      query: { id, token: JSON.stringify(token) },
+      query: { id, token },
     });
     return data;
   })<UserProfile>;
 
   const getUserFollowFansCount = withPromiseTryCatch(async (id: number) => {
-    const token = useAuthToken();
+    const token = useAuthToken().value;
     const { data } = await $fetch("/api/users/getFollowNum", {
       method: "GET",
-      query: { token: JSON.stringify(token), id },
+      query: { token, id },
     });
 
     return data;
   })<{ follower: number; fans: number }>;
 
   const follow = withPromiseTryCatch(async (id: number, followed: boolean) => {
-    const token = useAuthToken();
+    const token = useAuthToken().value;
     const data = await $fetch("/api/users/follow", {
       method: "GET",
-      query: { token: JSON.stringify(token), id, followed },
+      query: { token, id, followed },
     });
     console.log(data);
     return data;
   });
 
-  const checkFollow = withPromiseTryCatch(async (id: number) => {
-    const token = useAuthToken();
-    const { data } = await $fetch("/api/users/checkFollow", {
+  const checkIsFollowed = withPromiseTryCatch(async (id: number) => {
+    const token = useAuthToken().value;
+    const { data } = await $fetch("/api/users/checkIsFollowed", {
       method: "GET",
-      query: { token: JSON.stringify(token), id },
+      query: { token, id },
     });
     console.log(data);
     return data;
   });
+
+  const getCommonFollow = withPromiseTryCatch(async (id: number) => {
+    const token = useAuthToken().value;
+    const { data } = await $fetch("/api/users/commonFollow", {
+      method: "GET",
+      query: { id },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  })<UserProfile[]>;
 
   return {
     getProfile,
@@ -77,6 +90,7 @@ export default () => {
     setOffest,
     getUserFollowFansCount,
     follow,
-    checkFollow,
+    checkIsFollowed,
+    getCommonFollow,
   };
 };
