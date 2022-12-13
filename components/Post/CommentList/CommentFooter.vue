@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import { ChatLineRound, Pointer, Share } from "@element-plus/icons-vue";
+import { ElNotification } from "element-plus";
 const { addComment } = usePost();
 const props = defineProps<{
   entityId: number;
@@ -55,14 +56,17 @@ const handleOpenReplyForm = () => {
 };
 const handleSendReplyToComment = async () => {
   isSending.value = true;
-  const result = await addComment(
-    props.entityId,
-    reply.value,
-    props.rootId,
-    props.toCommentUserId
-  );
+  addComment(props.entityId, reply.value, props.rootId, props.toCommentUserId)
+    .then((res) => (reply.value = ""))
+    .catch((error) =>
+      ElNotification({
+        title: "No Auth!",
+        message: "Login First",
+        type: "warning",
+      })
+    );
+
   isSending.value = false;
-  if (result) reply.value = "";
 };
 </script>
 

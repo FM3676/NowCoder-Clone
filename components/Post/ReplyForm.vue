@@ -5,7 +5,7 @@
   >
     <input
       v-model="reply"
-      class="rounded-md flex-grow border outline-none  focus:border-green-350 p-2"
+      class="rounded-md flex-grow border outline-none focus:border-green-350 p-2"
       type="text"
       placeholder="输入你的评论吧"
     />
@@ -21,10 +21,10 @@ const emits = defineEmits(["onReply"]);
 const props = defineProps<{ isReplying: boolean; clearReply: boolean }>();
 const reply = ref<string>();
 
-watchEffect(()=> props.clearReply === true ? reply.value = "" : null)
+watchEffect(() => (props.clearReply === true ? (reply.value = "") : null));
 
 const handleSendReplyToPost = () => {
-  if (!props.isReplying) emits("onReply", reply);
+  if (!props.isReplying && reply.value) emits("onReply", reply);
 };
 </script>
 

@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+import { ElNotification } from "element-plus";
 import { Post } from "~~/interfaces/postInterface";
 
 const props = defineProps<{ postId: string }>();
@@ -29,9 +30,16 @@ const clearReply = ref(false);
 const handlePostReplySubmit = async (reply: string) => {
   isReplying.value = true;
   clearReply.value = false;
-  const result = await addComment(props.postId, reply);
+  addComment(props.postId, reply)
+    .then((res) => (clearReply.value = true))
+    .catch((error) =>
+      ElNotification({
+        title: "No Auth!",
+        message: "Login First",
+        type: "warning",
+      })
+    );
   isReplying.value = false;
-  if (result) clearReply.value = true;
 };
 
 onMounted(async () => {
