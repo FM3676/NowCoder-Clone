@@ -33,13 +33,32 @@
   </div>
 </template>
 <script setup lang="ts">
-const { getNoltices, setNotices, useNotices } = useNotice();
+import { ElNotification } from "element-plus";
+const router = useRouter();
+const { getNoltices, setNotices } = useNotice();
 const getLatestNotices = async () => {
   const result = await getNoltices();
   setNotices(result);
 };
 onMounted(() => getLatestNotices());
 onBeforeUpdate(() => getLatestNotices());
+/* Nav Gard */
+router.beforeEach((to, from, next) => {
+  const endPoints = ["/creation/MarkDown"];
+  if (!endPoints.includes(to.path)) return next();
+
+  const token = localStorage.getItem("token");
+
+  if (token) next();
+  else {
+    ElNotification({
+      title: "No Auth!",
+      message: "Login First",
+      type: "warning",
+    });
+    next(from.path);
+  }
+});
 </script>
 <style>
 .el-drawer {
