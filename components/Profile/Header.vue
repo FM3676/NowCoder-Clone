@@ -28,10 +28,24 @@
           <div class="h-4 bg-gray-400" style="width: 1px"></div>
           <div
             class="h-12 w-28 align-middle text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
-            @click="emits('onCheckFollowOrFans', '关注')"
+            @click="
+              isMineProfilePage ? emits('onCheckFollowOrFans', '关注') : null
+            "
           >
             <p>关注</p>
             <p>{{ props.follows }}</p>
+          </div>
+          <div
+            v-if="!isMineProfilePage"
+            class="h-4 bg-gray-400"
+            style="width: 1px"
+          ></div>
+          <div
+            v-if="!isMineProfilePage"
+            class="h-12 w-28 pt-2 text-center text-lg text-gray-600 hover:text-green-350 transition-all cursor-pointer"
+            @click="emits('onCheckFollowOrFans', '共同关注')"
+          >
+            <p>共同关注</p>
           </div>
         </div>
       </div>

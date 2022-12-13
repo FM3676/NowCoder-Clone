@@ -81,6 +81,7 @@ const {
   getUserFollowFansCount,
   getCommonFollow,
   getFans,
+  getFollowers,
 } = useUsers();
 const { getPostList } = usePost();
 /* Post And Follower's Newsest Post */
@@ -120,16 +121,11 @@ const handleQueryFollowOrFans = async (query: string) => {
   showFollowerFansDrawer.value = !showFollowerFansDrawer.value;
   renderTitle.value = query;
   if (query === "粉丝")
-    return (renderDrawerList.value = await handlQueryFans());
-
-  // handleQueryCommonFollowers();
+    return (renderDrawerList.value = await getFans(queryId));
+  if (query === "共同关注")
+    return (renderDrawerList.value = await getCommonFollow(queryId));
+  if (query === "关注") return (renderDrawerList.value = await getFollowers());
 };
-
-const handlQueryFollowers = async () => {};
-
-const handlQueryFans = async () => await getFans(queryId);
-
-const handleQueryCommonFollowers = async () => await getCommonFollow(queryId);
 
 onMounted(async () => {
   isLoading.value = true;

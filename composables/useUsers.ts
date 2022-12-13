@@ -94,6 +94,18 @@ export default () => {
     return data;
   })<UserProfile[]>;
 
+  const getFollowers = withPromiseTryCatch(async () => {
+    const token = useAuthToken().value;
+    const { data } = await $fetch("/api/users/getFollowers", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data.rows;
+  })<UserProfile[]>;
+
   return {
     getProfile,
     getFollowerNewestPost,
@@ -106,5 +118,6 @@ export default () => {
     checkIsFollowed,
     getCommonFollow,
     getFans,
+    getFollowers,
   };
 };
